@@ -197,7 +197,9 @@ npm run dev
 - **Descripción:** Elimina un producto por su ID-
 - **Parámetros:**
   - `id` (path, requerido): ID del producto a elmininar
+
+```
+http://localhost:4000/api/products/oXzZPJ8TuJANVjS0TMgf
+```
+
 - **Respuesta:** 204 No content
-
-
-
