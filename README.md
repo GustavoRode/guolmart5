@@ -76,7 +76,7 @@ npm run dev
 
 ### Obtener lista de productos
 
-- **GET** `/products`
+- **GET** `/api/products`
 - **Descripción:** Devuelve la lista de todos los productos.
 - **Respuesta ejemplo:**
 
@@ -107,9 +107,9 @@ npm run dev
 
 ### Crear producto
 
-- **POST** `/products`
+- **POST** `/api/products`
 - **Descripción:** Crea producto.
-- **Requiere token** Bearer token
+- **Requiere token:** Bearer token
 - **Body (JSON):**
 
 ````json
@@ -162,44 +162,62 @@ npm run dev
 ````
 
 
-### Crear producto
-
- - **POST** `/products`
- - **Descripción:** Crea un nuevo producto.
- - **Body (JSON):**
-
-```json{
-    "categories": [
-        "Categoria 3",
-        "Categoria 4"
-    ],
-    "price": 770,
-    "name": "Producto 8"
-}
-```
-- **Respuesta ejemplo:**
-
-```json
-{
-    "id": "YWMPdH24Si2t7GCciYDy",
-    "name": "Producto 8",
-    "price": 770,
-    "categories": [
-        "Categoria 3",
-        "Categoria 4"
-    ]
-}
-```
-
 ### Eliminar un producto
 
 - **DELETE** `/products/:id`
-- **Descripción:** Elimina un producto por su ID-
+- **Descripción:** Elimina un producto por su ID.
+- **Requiere token:** Bearer token
 - **Parámetros:**
-  - `id` (path, requerido): ID del producto a elmininar
+  - `id` (path, requerido): ID del producto.
+- **Ejemplo de uso:** `/products/oXzZPJ8TuJANVjS0TMgf`
+- **Respuesta ejemplo:** 204 No content
 
+
+### Modificar un producto
+
+- **PUT** `/products/:id`
+- **Descripción:** Modifica un producto por su ID.
+- **Requiere token:** Bearer token
+- **Parámetros:**
+  - `id` (path, requerido): ID del producto.
+- **Ejemplo de uso:** `/products/oXzZPJ8TuJANVjS0TMgf`
+
+- **Body (JSON):**
+````json
+{
+    "name": "Brownies",
+    "price": 4500,
+    "categories": [
+        "Dulces",
+        "Pastelería"
+    ],
+    "stock": 99
+}
+````
+
+- **Respuesta ejemplo no exitoso:** 404 Not Found
 ```
-http://localhost:4000/api/products/oXzZPJ8TuJANVjS0TMgf
+{
+    "error": "Producto no encontrado para modificar"
+}
 ```
 
-- **Respuesta:** 204 No content
+- **Respuesta ejemplo no exitoso:** 401 Unauthorized
+```
+{
+    "message": "Token inválido"
+}
+```
+
+- **Respuesta ejemplo exitoso:** 201 OK
+```
+{
+    "id": "mDRASDcDyIYtnuKUXLWU",
+    "name": "Brownies",
+    "price": 4500,
+    "stock": 99,
+    "categories": [
+        "Dulces",
+        "Pastelería"
+    ]
+}
